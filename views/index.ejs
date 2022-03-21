@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">Digitalização utilizando brscanner</a>
+</nav>
+<div class="container">
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12"><h4>Selecione um scanner e inicie a digitalização</h4></div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-6">
+            <select class="form-control" name="listarScanners" id="listarScanner">
+            </select>
+        </div>
+        <div class="col-md-6"><button class="btn btn-primary mb-2" id="digitalizar">Digitalizar</button></div>
+    </div>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/socket.js"></script>
+<script type="text/javascript" src="/js/scanner.js"></script>
+</html>

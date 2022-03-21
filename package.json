@@ -1,0 +1,19 @@
+{
+  "name": "websocket",
+  "version": "1.0.0",
+  "description": "server websocket node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "jimp": "^0.16.1",
+    "jquery": "^3.6.0",
+    "node-base64-image": "^2.0.4",
+    "socket.io": "^4.4.1"
+  }
+}
