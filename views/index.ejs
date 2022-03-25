@@ -6,29 +6,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="#">Digitalização utilizando brscanner</a>
-</nav>
-<div class="container">
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-12"><h4>Selecione um scanner e inicie a digitalização</h4></div>
-    </div>
-    <div class="row" style="margin-top: 10px;">
-        <div class="col-md-6">
-            <select class="form-control" name="listarScanners" id="listarScanner">
-            </select>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Digitalização utilizando brscanner</a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Indexadores</h2>
+                <div class="row">
+                    <label for="cpf" class="form-label">CPF:</label>
+                    <input type="text" class="form-control" id="cpf">
+                </div>
+                <div class="row">
+                    <label for="tel" class="form-label">Nº de linha:</label>
+                    <input type="text" class="form-control" id="tel">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <h2>Documentos a Digitalizar</h2>
+                <div class="row">
+                    <input type="text" class="form-control" maxlength="1" id="txtCHQ" style="max-width: 35px;"
+                        value="1">
+                    <label class="form-label" for="checkQD">
+                        Cheklist de Qualidade (Max 03 Páginas) - Obrigatório
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" maxlength="1" id="txtCE" style="max-width: 35px;" value="1">
+                    <label class="form-label" for="checkCE">
+                        Comprovante de Endereço (Max 01 Página) - Obrigatório
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" maxlength="1" id="txtIDCPF" style="max-width: 35px;"
+                        value="1">
+                    <label class="form-label" for="checkIDCPF">
+                        Documento de identificação e CPF (Máx 02 Páginas) - Obrigatório
+                    </label>
+                </div>
+                <div class="row">
+                    <input type="text" class="form-control" maxlength="1" id="txtCHDef" style="max-width: 35px;"
+                        value="1">
+                    <label class="form-label" for="checkDef">
+                        Termo de adesão (Max 05 Páginas) - Obrigatório
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6"><button class="btn btn-primary mb-2" id="digitalizar">Digitalizar</button></div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-12">
+                <h4>Selecione um scanner e inicie a digitalização</h4>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <div class="col-md-6">
+                <select class="form-control" name="listarScanners" id="listarScanner">
+                </select>
+            </div>
+            <div class="col-md-6"><button class="btn btn-primary mb-2" id="digitalizar">Digitalizar</button></div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="exibirModal" data-toggle="modal"
+            data-target="#exampleModalCenter">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Digitalização iniciada</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img id="image" src="tmp/4.611325162813033.jpg" style="display: block; max-width: 100%;">
+                          </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
+    <!--Fecha o container-->
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+</script>
 <script type="text/javascript" src="/js/socket.js"></script>
 <script type="text/javascript" src="/js/scanner.js"></script>
+
 </html>

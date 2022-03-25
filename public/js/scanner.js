@@ -1,3 +1,10 @@
+qtdQualidade = $("#txtCHQ").val();
+qtdEnd = $('#txtCE').val();
+qtdIDCpf = $('#txtIDCPF').val();
+qtdTermAds = $('#txtCHDef').val();
+qtdPaginas = qtdQualidade+qtdEnd+qtdIDCpf+qtdTermAds;
+
+
 (function() {
     var ws = null;
     var connected = false;
@@ -40,13 +47,20 @@
             WebSocketClient.listarScanners(conf.data);
         }
         if(conf.ResponseType == 'digitalizar'){
-            var base64 = conf.data.imagem;
-            base64 = base64.split(",");
-            base64 = base64[1];
-            //enviando pro node
-            socket.emit("uploadImg", {base64});
+            //console.log(conf);
+            if(conf.data.imagem ==  null){
+                //alert("Erro: "+ conf.data.status +" = " +conf.data.msg);
+                //console.log(conf.data.msg);
+            }else{
+                var base64 = conf.data.imagem;
+                base64 = base64.split(",");
+                base64 = base64[1];
+                //enviando pro node
+                socket.emit("uploadImg", {base64});
+            }
+           
         }
-        console.log(data);
+        //console.log(data);
     };
 
     var onError = function(event) {
@@ -67,7 +81,7 @@
             })
         },
         digitalizaBtn: function(scanner){       
-            var config = '{RequestType:"digitalizar", ConfigScanner : { "typeScanner" : "usb", "descScanner": "'+ scanner +'", "DPI":1184, "Threshold": 3, "AutoFeed": 1, "ShowTwainUI": 1, "ShowProgressIndicatorUI": 1, "UseDuplex": 1, "UseDocumentFeeder": 1}}';
+            var config = '{RequestType:"digitalizar", ConfigScanner : {"descScanner": "'+ scanner +'", "Threshold": 3, "AutoFeed": 2, "ShowTwainUI": 0, "ShowProgressIndicatorUI": 2, "UseDuplex": 2, "UseDocumentFeeder": 2}}';
             ws.send(config);
         },
     };
@@ -77,8 +91,76 @@ var WebSocketClient;
 
 $(function() {
     WebSocketClient.init();
-  });
-  $('#digitalizar').click(function(e){
+});
+
+//ao clicar no botão digitalizar
+$('#digitalizar').on('click', function(e){
+    verificarDigitalizacao();
+});
+
+/*Validar se tem apenas números*/
+$('#txtCHQ').on('keyup', function(event) {
+    var valorMaximo = 3;
+    var valorMinimo = 1;
+  
+    if (event.target.value > valorMaximo || event.target.value < valorMinimo)
+      return event.target.value = valorMaximo;   
+});
+
+$('#txtCE').on('keyup', function(event) {
+    var valorMaximo = 1;
+    var valorMinimo = 1;
+  
+    if (event.target.value > valorMaximo || event.target.value < valorMinimo)
+      return event.target.value = valorMaximo;   
+});
+$('#txtIDCPF').on('keyup', function(event) {
+    var valorMaximo = 2;
+    var valorMinimo = 1;
+  
+    if (event.target.value > valorMaximo || event.target.value < valorMinimo)
+      return event.target.value = valorMaximo;   
+});
+$('#txtCHDef').on('keyup', function(event) {
+    var valorMaximo = 5;
+    var valorMinimo = 1;
+  
+    if (event.target.value > valorMaximo || event.target.value < valorMinimo)
+      return event.target.value = valorMaximo;   
+});
+
+$('#exibirModal').on('click', function(e){
+    $('#exampleModalCenter').modal('show');
+});
+
+function verificarDigitalizacao(){   
+    //inicia o websocket de acordo com a scanner selecionada.
     scanner = $("#listarScanner option:selected").val();
     WebSocketClient.digitalizaBtn(scanner);
+    atualizaDigitalizacao(0, qtdPaginas);
+}
+
+function atualizaDigitalizacao(controle, qtdTotal){
+    if(controle < qtdTotal){
+
+    }
+    if(controle == qtdTotal){
+
+    }
+
+}
+// import 'cropperjs/dist/cropper.css';
+
+const image = document.getElementById('image');
+const cropper = new Cropper(image, {
+  aspectRatio: 16 / 9,
+  crop(event) {
+    console.log(event.detail.x);
+    console.log(event.detail.y);
+    console.log(event.detail.width);
+    console.log(event.detail.height);
+    console.log(event.detail.rotate);
+    console.log(event.detail.scaleX);
+    console.log(event.detail.scaleY);
+  },
 });

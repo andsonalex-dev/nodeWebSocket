@@ -3,3 +3,7 @@ var socket = io("https://localhost:8080"); //objeto passado pelo script conectan
 socket.emit("Boasvindas", {nome: "Andson de Oliveira"}); //passando os dados via json
 
 
+socket.on("imagem", (data) => {
+    document.getElementById("image").src = "tmp/"+data; 
+    $('#exampleModalCenter').modal('show');
+});

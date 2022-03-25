@@ -32,8 +32,10 @@ io.on("connection" ,(socket) =>{
         now = new Date;
         nameArquivo = now.getMonth()+now.getDay()+Math.random()+".jpg";
         if(decode_base64(data.base64.toString(), nameArquivo)){
-            io.emit("Sucesso");
+         
         }
+        console.log(nameArquivo);
+        socket.emit("imagem", nameArquivo);
 
     })
     
@@ -48,6 +50,7 @@ io.on("connection" ,(socket) =>{
       if (error) {
         throw error;
       } else {
+        console.log(filename);
         console.log('File created from base64 string!');
         return true;
       }
