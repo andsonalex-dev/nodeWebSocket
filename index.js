@@ -31,11 +31,11 @@ io.on("connection" ,(socket) =>{
     socket.on("uploadImg", (data) =>{
         now = new Date;
         nameArquivo = now.getMonth()+now.getDay()+Math.random()+".jpg";
-        if(decode_base64(data.base64.toString(), nameArquivo)){
-         
+        if(!decode_base64(data.base64.toString(), nameArquivo)){
+         console.log("Erro");
         }
         console.log(nameArquivo);
-        socket.emit("imagem", nameArquivo);
+        socket.emit("imagem", nameArquivo); //enviando para o cliente o atributo "nome da imagem, podendo ser caminho ou qualquer outro atributo"
 
     })
     
@@ -50,7 +50,6 @@ io.on("connection" ,(socket) =>{
       if (error) {
         throw error;
       } else {
-        console.log(filename);
         console.log('File created from base64 string!');
         return true;
       }
